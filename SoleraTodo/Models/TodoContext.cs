@@ -7,7 +7,11 @@ namespace SoleraTodo.Models
         public TodoContext(DbContextOptions<TodoContext> options) : base(options)
         {
         }
-        
+
+        public TodoContext()
+        {
+        }
+
         public DbSet<Todo> TodoItems { get; set; }
     }
 }
