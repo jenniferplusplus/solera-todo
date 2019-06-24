@@ -16,7 +16,15 @@ namespace SoleraTodo.Controllers
         [Route("/api/[controller]")]
         public IActionResult Index()
         {
-            return new OkObjectResult("You've reached the end of the internet. There is nothing more to see.");
+            var getAll = _repository.GetAll();
+            return new OkObjectResult(getAll);
+        }
+        
+        [Route("/api/[controller]/[id]")]
+        public IActionResult Index()
+        {
+            var getAll = _repository.GetAll();
+            return new OkObjectResult(getAll);
         }
     }
 }
