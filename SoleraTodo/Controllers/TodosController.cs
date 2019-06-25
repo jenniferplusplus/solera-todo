@@ -14,17 +14,25 @@ namespace SoleraTodo.Controllers
         
         // GET
         [Route("/api/[controller]")]
-        public IActionResult Index()
+        public IActionResult GetAll()
         {
-            var getAll = _repository.GetAll();
-            return new OkObjectResult(getAll);
+            var allResults = _repository.GetAll();
+            return new OkObjectResult(allResults);
         }
         
-        [Route("/api/[controller]/[id]")]
-        public IActionResult Index()
+        [Route("/api/[controller]/{id}")]
+        public IActionResult GetOne(int id)
         {
-            var getAll = _repository.GetAll();
-            return new OkObjectResult(getAll);
+            var result = _repository.GetById(id);
+            return new OkObjectResult(result);
+        }
+
+        [HttpPost]
+        [Route("/api/[controller]")]
+        public IActionResult Create([FromBody]Todo todo)
+        {
+            var result = _repository.Add(todo);
+            return new OkObjectResult(result);
         }
     }
 }

@@ -29,14 +29,18 @@ namespace SoleraTodo.Models
             return db.TodoItems.Where(x => true);
         }
 
-        public void Add(Todo todo)
+        public int Add(Todo todo)
         {
-            db.TodoItems.Add(todo);
+            var result = db.TodoItems.Add(todo);
+            db.SaveChanges();
+            
+            return result.Entity.TodoId;
         }
 
         public void Update(Todo todo)
         {
             db.TodoItems.Update(todo);
+            db.SaveChanges();
         }
 
         public void Dispose()

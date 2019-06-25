@@ -6,7 +6,7 @@ namespace SoleraTodo.Models
     {
         Todo GetById(int id);
         IEnumerable<Todo> GetAll();
-        void Add(Todo todo);
+        int Add(Todo todo);
         void Update(Todo todo);
     }
 }
