@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace SoleraTodo.Models
 {
@@ -6,7 +7,7 @@ namespace SoleraTodo.Models
     {
         Todo GetById(int id);
         IEnumerable<Todo> GetAll();
-        int Add(Todo todo);
+        Task<Todo> Add(Todo todo);
         void Update(Todo todo);
     }
 }

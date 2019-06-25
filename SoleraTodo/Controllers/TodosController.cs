@@ -1,8 +1,11 @@
+using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using SoleraTodo.Models;
 
 namespace SoleraTodo.Controllers
 {
+    [ApiController]
+    [Route("/api/[controller]/")]
     public class TodosController : Controller
     {
         private ITodoRepository _repository;
@@ -12,26 +15,29 @@ namespace SoleraTodo.Controllers
             _repository = repository;
         }
         
-        // GET
-        [Route("/api/[controller]")]
+        [HttpGet("")]
         public IActionResult GetAll()
         {
             var allResults = _repository.GetAll();
+            
             return new OkObjectResult(allResults);
         }
         
-        [Route("/api/[controller]/{id}")]
+        [HttpGet("{id}")]
         public IActionResult GetOne(int id)
         {
             var result = _repository.GetById(id);
+            
+            if(result == null) return new NotFoundResult();
+            
             return new OkObjectResult(result);
         }
 
-        [HttpPost]
-        [Route("/api/[controller]")]
-        public IActionResult Create([FromBody]Todo todo)
+        [HttpPost("")]
+        public async Task<IActionResult> Create([FromBody]Todo todo)
         {
-            var result = _repository.Add(todo);
+            var result = await _repository.Add(todo);
+            
             return new OkObjectResult(result);
         }
     }

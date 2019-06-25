@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace SoleraTodo.Models
 {
@@ -29,12 +30,12 @@ namespace SoleraTodo.Models
             return db.TodoItems.Where(x => true);
         }
 
-        public int Add(Todo todo)
+        public async Task<Todo> Add(Todo todo)
         {
             var result = db.TodoItems.Add(todo);
-            db.SaveChanges();
+            await db.SaveChangesAsync();
             
-            return result.Entity.TodoId;
+            return result.Entity;
         }
 
         public void Update(Todo todo)
